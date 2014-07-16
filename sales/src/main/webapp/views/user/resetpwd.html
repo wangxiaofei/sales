@@ -1,0 +1,55 @@
+<div>
+    <div>
+        <ol class="breadcrumb">
+            <li><a href="">个人信息</a></li>
+            <li class="active">修改密码</li>
+            <li class="active">{{user.userName}}</li>
+        </ol>
+
+    </div>
+    <form class="form-horizontal" role="form" name="form">
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-5">
+                <input type="password" name="password" maxlength="20" class="form-control" id="password" placeholder="密码" ng-model="user.password" required="true" ng-minlength=4 ng-maxlength=20>
+            </div>
+            <div class="error" ng-show="form.password.$dirty && form.password.$invalid">
+                <small class="alert alert-danger well-sm" ng-show="form.password.$error.required">密码是必须的</small>
+                <small class="alert alert-danger well-sm" ng-show="form.password.$error.minlength">长度必须大于4</small>
+                <small class="alert alert-danger well-sm" ng-show="form.password.$error.maxlength">长度不能大于20</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="newPassword" class="col-sm-2 control-label">新密码</label>
+            <div class="col-sm-5">
+                <input type="password" name="newPassword" maxlength="20" class="form-control" id="newPassword" placeholder="新密码" ng-model="user.newPassword" required="true" ng-minlength=4 ng-maxlength=20>
+            </div>
+            <div class="error" ng-show="form.newPassword.$dirty && form.newPassword.$invalid">
+                <small class="alert alert-danger well-sm" ng-show="form.newPassword.$error.required">密码是必须的</small>
+                <small class="alert alert-danger well-sm" ng-show="form.newPassword.$error.minlength">长度必须大于4</small>
+                <small class="alert alert-danger well-sm" ng-show="form.newPassword.$error.maxlength">长度不能大于20</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="repeatPassword" class="col-sm-2 control-label">新密码</label>
+            <div class="col-sm-5">
+                <input type="password" name="repeatPassword" maxlength="20" class="form-control" id="repeatPassword" placeholder="请重复新密码" ng-model="user.repeatPassword" required="true" ng-minlength=4 ng-maxlength=20>
+            </div>
+            <div class="error" ng-show="form.repeatPassword.$dirty && form.repeatPassword.$invalid || (user.newPassword !== user.repeatPassword)">
+                <small class="alert alert-danger well-sm" ng-show="form.repeatPassword.$error.required">密码是必须的</small>
+                <small class="alert alert-danger well-sm" ng-show="form.repeatPassword.$error.minlength">长度必须大于4</small>
+                <small class="alert alert-danger well-sm" ng-show="form.repeatPassword.$error.maxlength">长度不能大于20</small>
+                <small class="alert alert-danger well-sm" ng-show="user.newPassword !== user.repeatPassword">两次密码不一致</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" ng-disabled="form.$invalid || (user.newPassword !== user.repeatPassword) || modifyRet.success" class="btn btn-primary btn-lg" ng-click="updateUser();">保存</button>
+                <button type="submit" class="btn btn-primary btn-lg" onclick="window.history.back();">取消</button>
+                <small class="alert alert-success well-sm" ng-show="modifyRet.success != null && modifyRet.success">修改成功</small>
+                <small class="alert alert-danger well-sm" ng-show="modifyRet.success != null && !modifyRet.success">修改失败</small>
+                <small class="alert alert-danger well-sm" ng-show="modifyRet.info">{{modifyRet.info}}</small>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<!--启动Spring MVC的注解功能,设置编码方式，防止乱码 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.shawn.sales.web.controller" />
+
+	<!-- interceptor 针对普通用户进行一些 分角色权限的URL拦截 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/loadUsers" />
+			<mvc:mapping path="/user/jumpCreate" />
+			<bean class="com.shawn.sales.filter.LoginInterceptor" />
+		</mvc:interceptor>
+		关于全局可访问资源的过滤器
+		<mvc:interceptor>
+			<mvc:mapping path="/help" />
+			<bean class="com.shawn.sales.filter.GlobalInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+
+	<!-- spring mvc 异常处理类,没有自定义异常，这个类意义不大用于以后扩展 <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> <property name="exceptionMappings"> <props> <prop key="java.lang.Exception">error/500</prop> 由于未定义userMiner 异常，所以此配置开启没太大意义 </props> </property> </bean> -->
+
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/grid/**" location="/grid/" />
+	<mvc:resources mapping="/theme/**" location="/theme/" />
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	</bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1024000"></property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+</beans>

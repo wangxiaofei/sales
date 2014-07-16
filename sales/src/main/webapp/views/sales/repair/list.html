@@ -1,0 +1,67 @@
+<div>
+    <div>
+        <ol class="breadcrumb">
+            <li><a href="#/sale/list">销售管理</a></li>
+            <li> <a href="#/sale/list">列表</a></li>
+            <li><a>销售记录{{saleId}}</a></li>
+            <li class="active">维修记录</li>
+            <a ng-show="sessionUser.role == 0" href="#/sale/repair/create/{{saleId}}" class="pull-right">新建</a>
+        </ol>
+
+    </div>
+    <div class="table-responsive">
+        <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+                <th><label>ID</label></th>
+                <th><label>维修内容</label></th>
+                <th><label>维修时间</label></th>
+                <th><label>创建时间</label></th>
+                <th><label>操作</label></th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="rd in paginator.currentPageItems">
+            <tr>
+                <td>{{rd.id}}</td>
+                <td>{{rd.content}}</td>
+                <td>{{rd.repairTime | date:"yyyy-MM-dd"}}</td>
+                <td>{{rd.createTime | date:"yyyy-MM-dd"}}</td>
+                <td>
+                    <a ng-show="sessionUser.role == 0" href="" ng-click="confirmDel(rd);" class="">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</tbody>
+</table>
+<div ng-show="hasData==2">
+    <h2>没有相关数据</h2>
+</div>
+<div class="error" ng-show="hasData==3 || hasData==4">
+    抱歉，发送内部错误
+</div>
+<ul class="pager" ng-show="hasData==1 && page.pageCount > 1">
+    <li>
+        <button class="btn btn-primary btn-sm" ng-class="{disabled:page.page == 1}" ng-disabled="page.page == 1"
+                ng-click="goToPrev()">上一页
+        </button>
+    </li>
+    <li class="num">{{page.page}}/{{page.pageCount}}</li>
+    <li>
+        <button class="btn btn-primary btn-sm" ng-class="{disabled:page.page ==  page.pageCount}"
+                ng-disabled="page.page == page.pageCount"
+                ng-click="goToNext()">下一页
+        </button>
+    </li>
+    <li class="search">前往第<input type="text" ng-init="goToPage=1" ng-model="goToPage">页
+        <button class="btn btn-primary btn-sm"
+                ng-disabled=" !(goToPage != '' && goToPage<=page.pageCount && goToPage >= 1)"
+                ng-class="{disabled:!(goToPage != '' && goToPage<=page.pageCount && goToPage >= 1)  } "
+                ng-click="goToAppoint(goToPage)">GO!
+        </button>
+    </li>
+</ul>
+</div>

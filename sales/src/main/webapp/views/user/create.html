@@ -1,0 +1,83 @@
+<div>
+    <div>
+        <ol class="breadcrumb">
+            <li><a href="#/user/list">用户管理</a></li>
+            <li class="active">新建用户</li>
+        </ol>
+
+    </div>
+    <form class="form-horizontal" role="form" name="form" ng-submit="createUser();">
+        <div class="form-group">
+            <label for="loginName" class="col-sm-2 control-label">登录名</label>
+
+            <div class="col-sm-5">
+                <input type="text" name="loginName" class="form-control" id="loginName" placeholder="登录名"
+                       ng-model="user.loginName" required="true" ng-minlength=4 ng-maxlength=20
+                       ensure-unique="{{user.loginName}}">
+            </div>
+            <div class="error" ng-show="form.loginName.$dirty && form.loginName.$invalid">
+                <small class="error" ng-show="form.loginName.$error.required">登录名是必须的</small>
+                <small class="error" ng-show="form.loginName.$error.minlength">长度必须大于4</small>
+                <small class="error" ng-show="form.loginName.$error.maxlength">长度不能大于20</small>
+                <small class="error" ng-show="form.loginName.$error.unique">登录名已存在</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+            <div class="col-sm-5">
+                <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password"
+                       ng-model="user.password" required="true" ng-minlength=4 ng-maxlength=20>
+            </div>
+            <div class="error" ng-show="form.password.$dirty && form.password.$invalid">
+                <small class="error" ng-show="form.password.$error.required">密码是必须的</small>
+                <small class="error" ng-show="form.password.$error.minlength">长度必须大于4</small>
+                <small class="error" ng-show="form.password.$error.maxlength">长度不能大于20</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="userName" class="col-sm-2 control-label">姓名</label>
+
+            <div class="col-sm-5">
+                <input type="text" name="userName" class="form-control" id="userName" placeholder="姓名"
+                       ng-model="user.userName" required="true" ng-maxlength=20>
+            </div>
+            <div class="error" ng-show="form.userName.$dirty && form.userName.$invalid">
+                <small class="alert alert-danger well-sm" ng-show="form.userName.$error.required">姓名是必须的</small>
+                <small class="alert alert-danger well-sm" ng-show="form.userName.$error.maxlength">长度不能大于20</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">Email</label>
+
+            <div class="col-sm-5">
+                <input type="email" name="email" maxlength="20" class="form-control" id="email" placeholder="Email"
+                       ng-model="user.email" required="true" ng-minlength=4 ng-maxlength=20>
+            </div>
+            <div class="error" ng-show="form.email.$dirty && form.email.$invalid">
+                <small class="alert alert-danger well-sm" ng-show="form.email.$error.required">Email是必须的</small>
+                <small class="alert alert-danger well-sm" ng-show="form.email.$error.minlength">长度必须大于4</small>
+                <small class="alert alert-danger well-sm" ng-show="form.email.$error.maxlength">长度不能大于20</small>
+                <small class="alert alert-danger well-sm" ng-show="form.email.$error.email">邮箱格式不正确</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="role" class="col-sm-2 control-label">角色</label>
+            <div class="col-sm-5">
+                <select class="form-control" id="role" ng-model="user.role" name="role" required="true">
+                    <option value="1" selected="selected">普通用户</option>
+                    <option value="0">管理员</option>
+                </select>
+            </div>
+            <div class="error" ng-show="form.role.$dirty && form.role.$invalid">
+                <small class="alert alert-danger well-sm" ng-show="form.role.$error.required">角色是必须的</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary btn-lg">保存</button>
+                <button type="submit" class="btn btn-primary btn-lg" onclick="window.history.back();">取消</button>
+            </div>
+        </div>
+    </form>
+</div>

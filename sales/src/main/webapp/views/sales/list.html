@@ -1,0 +1,89 @@
+<div>
+    <div>
+        <ol class="breadcrumb">
+            <li><a href="#/sale/list">销售管理</a></li>
+            <li class="active">列表</li>
+            <a ng-show="sessionUser.role == 0" href="#/sale/create" class="pull-right">新建</a>
+        </ol>
+    </div>
+    <div>
+        <form class="navbar-form navbar-right form-inline" role="search" ng-submit="searchSales();">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="keywords" title="客户姓名/联系方式/地址/安装时间/机身编号/安装机型" placeholder="客户姓名/联系方式/地址/安装时间/机身编号/安装机型">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name='dateWords' id="dateWords" ng-model="dateWords" placeholder="安装时间">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+                <th><label>客户姓名</label></th>
+                <th><label>客户联系方式</label></th>
+                <th><label>客户地址</label></th>
+                <th><label>安装机型</label></th>
+                <th><label>机身编号</label></th>
+                <th><label>销售者姓名</label></th>
+                <th><label>安装时间</label></th>
+                <th><label>回访记录</label></th>
+                <th><label>维修记录</label></th>
+                <th><label>处理状态</label></th>
+                <th><label>操作</label></th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="rd in paginator.currentPageItems">
+            <tr>
+                <td>{{rd.customerName}}</td>
+                <td>{{rd.customerPhone}}</td>
+                <td>{{rd.customerAddress}}</td>
+                <td>{{rd.machineModel}}</td>
+                <td>{{rd.machineNumber}}</td>
+                <td>{{rd.saleUser.userName}}</td>
+                <td>{{rd.saleTime | date:"yyyy-MM-dd"}}</td>
+                <td><a href="#/sale/visit/list/{{rd.id}}">回访记录查看</a></td>
+                <td><a href="#/sale/repair/list/{{rd.id}}">维修记录查看</a></td>
+                <td>{{rd.isProcess | processFormat}}</td>
+                <td>
+                    <a ng-show="sessionUser.role == 0" href="#/sale/update/{{rd.id}}" class="">修改</a>
+                    <a ng-show="sessionUser.role == 0" href="" ng-click="confirmDel(rd);" class="">删除</a>
+                    <a ng-show="sessionUser.role == 0 && rd.isProcess == 0" href="" ng-click="processSale(rd);">处理</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</tbody>
+</table>
+<div ng-show="hasData==2">
+    <h2>没有相关数据</h2>
+</div>
+<div class="error" ng-show="hasData==3 || hasData==4">
+    抱歉，发送内部错误
+</div>
+<ul class="pager" ng-show="hasData==1 && page.pageCount > 1">
+    <li>
+        <button class="btn btn-primary btn-sm" ng-class="{disabled:page.page == 1}" ng-disabled="page.page == 1"
+                ng-click="goToPrev()">上一页
+        </button>
+    </li>
+    <li class="num">{{page.page}}/{{page.pageCount}}</li>
+    <li>
+        <button class="btn btn-primary btn-sm" ng-class="{disabled:page.page ==  page.pageCount}"
+                ng-disabled="page.page == page.pageCount"
+                ng-click="goToNext()">下一页
+        </button>
+    </li>
+    <li class="search">前往第<input type="text" ng-init="goToPage=1" ng-model="goToPage">页
+        <button class="btn btn-primary btn-sm"
+                ng-disabled=" !(goToPage != '' && goToPage<=page.pageCount && goToPage >= 1)"
+                ng-class="{disabled:!(goToPage != '' && goToPage<=page.pageCount && goToPage >= 1)  } "
+                ng-click="goToAppoint(goToPage)">GO!
+        </button>
+    </li>
+</ul>
+</div>

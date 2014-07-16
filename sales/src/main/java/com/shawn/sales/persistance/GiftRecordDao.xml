@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shawn.sales.persistance.GiftRecordDao">
+	<resultMap id="BaseResultMap" type="GiftRecord">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" />
+		<result column="price" property="price" />
+		<result column="giftName" property="giftName" />
+		<result column="customerId" property="customerId" />
+		<result column="userId" property="userId" />
+		<result column="isDeleted" property="isDeleted" />
+		<result column="createTime" property="createTime" />
+		<result column="updateTime" property="updateTime" />
+	</resultMap>
+
+	<sql id="Table_Name">
+		`record_gift`
+	</sql>
+	<sql id="Simple_Column_List">
+		id,name,price,giftName,customerId,userId,isDeleted,createTime,updateTime
+	</sql>
+	<sql id="Base_Column_List">
+		id,name,price,giftName,customerId,userId,isDeleted,createTime,updateTime
+	</sql>
+
+	<insert id="create" parameterType="GiftRecord" >
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO
+		<include refid="Table_Name" />
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			<if test="name != null">
+				name,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="giftName != null">
+				giftName,
+			</if>
+			<if test="customerId != null">
+				customerId,
+			</if>
+			<if test="userId != null">
+				userId,
+			</if>
+			<if test="isDeleted != null">
+				isDeleted,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="updateTime != null">
+				updateTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id,jdbcType=BIGINT},
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="price != null">
+				#{price},
+			</if>
+			<if test="giftName != null">
+				#{giftName},
+			</if>
+			<if test="customerId != null">
+				#{customerId},
+			</if>
+			<if test="userId != null">
+				#{userId},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateIfNecessary" parameterType="GiftRecord">
+		UPDATE
+		<include refid="Table_Name" />
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="price != null">
+				price = #{price},
+			</if>
+			<if test="giftName != null">
+				giftName = #{giftName},
+			</if>
+			<if test="customerId != null">
+				customerId = #{customerId},
+			</if>
+			<if test="userId != null">
+				userId = #{userId},
+			</if>
+			<if test="isDeleted != null">
+				isDeleted = #{isDeleted},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime},
+			</if>
+			<if test="updateTime != null">
+				updateTime = #{updateTime},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	<update id="update" parameterType="GiftRecord">
+		UPDATE
+		<include refid="Table_Name" />
+		SET 
+		<![CDATA[
+		name = #{name},
+		price = #{price},
+		giftName = #{giftName},
+		customerId = #{customerId},
+		userId = #{userId},
+		isDeleted = #{isDeleted},		
+		create_time = 	#{createTime},
+		update_time = #{updateTime}
+		WHERE id = #{id,jdbcType=BIGINT}
+		]]>
+	</update>
+
+	<select id="getById" parameterType="long" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		<include refid="Table_Name" />
+		WHERE `id` = #{id}
+	</select>
+
+	<delete id="delete" parameterType="long">
+		DELETE FROM
+		<include refid="Table_Name" />
+		WHERE `id` = #{id}
+	</delete>
+
+	<!-- custom sql -->
+
+</mapper>
