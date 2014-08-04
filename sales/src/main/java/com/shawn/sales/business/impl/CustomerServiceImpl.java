@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<Customer> create(Customer customer) throws Exception {
-		ResultDto<Customer> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Customer> ret = new ResultDto<Customer>(EnumResultCode.SUCCESS.getCode());
 		if (customer == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -45,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public ResultDto<Page<Customer>> getList(Long userId, Integer page, Integer count) throws Exception {
-		ResultDto<Page<Customer>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<Customer>> ret = new ResultDto<Page<Customer>>(EnumResultCode.SUCCESS.getCode());
 		if (page == null || count == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
 		List<Customer> list = cusDao.getList(userId, PageHelper.getStartPosition(page, count), count);
 		Integer total = cusDao.getListCount(userId);
 		if (list != null && !list.isEmpty()) {
-			Page<Customer> p = new Page<>(page, count);
+			Page<Customer> p = new Page<Customer>(page, count);
 			p.setList(list);
 			p.setTotalResults(total);
 			ret.setData(p);
@@ -66,7 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<Customer> delete(Long id) throws Exception {
-		ResultDto<Customer> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Customer> ret = new ResultDto<Customer>(EnumResultCode.SUCCESS.getCode());
 		if (id == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -81,7 +81,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<Customer> update(Customer customer) throws Exception {
-		ResultDto<Customer> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Customer> ret = new ResultDto<Customer>(EnumResultCode.SUCCESS.getCode());
 		if (customer == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -93,7 +93,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public ResultDto<Customer> get(Long id) {
-		ResultDto<Customer> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Customer> ret = new ResultDto<Customer>(EnumResultCode.SUCCESS.getCode());
 		if (id == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -109,7 +109,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public ResultDto<List<Customer>> getAllList(Long userId) {
-		ResultDto<List<Customer>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<List<Customer>> ret = new ResultDto<List<Customer>>(EnumResultCode.SUCCESS.getCode());
 		List<Customer> cus = cusDao.getAll(userId);
 		if (cus != null) {
 			ret.setData(cus);

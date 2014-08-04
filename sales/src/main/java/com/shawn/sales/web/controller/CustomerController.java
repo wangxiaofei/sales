@@ -34,7 +34,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/create")
 	public @ResponseBody ResultDto<Customer> create(@RequestBody Customer customer) {
-		ResultDto<Customer> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Customer> ret = new ResultDto<Customer>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = cusService.create(customer);
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public class CustomerController {
 	}
 	@RequestMapping(value = "/list")
 	public @ResponseBody ResultDto<Page<Customer>> getList(HttpServletRequest request,@RequestParam(value="userId",required=false) Long userId,@RequestParam("page")Integer page,@RequestParam("count")Integer count){
-		ResultDto<Page<Customer>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<Customer>> ret = new ResultDto<Page<Customer>>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = cusService.getList(null,page,count);
 		} catch (Exception e) {
@@ -59,7 +59,7 @@ public class CustomerController {
 	
 	@RequestMapping(value = "/list/all")
 	public @ResponseBody ResultDto<List<Customer>> getAllList(HttpServletRequest request,@RequestParam(value="userId",required=false) Long userId){
-		ResultDto<List<Customer>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<List<Customer>> ret = new ResultDto<List<Customer>>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = cusService.getAllList(null);
 		} catch (Exception e) {
@@ -72,7 +72,7 @@ public class CustomerController {
 	
 	@RequestMapping(value = "/update")
 	public @ResponseBody ResultDto<Customer> update(@RequestBody Customer customer){
-		ResultDto<Customer> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Customer> ret = new ResultDto<Customer>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = cusService.update(customer);
 		} catch (Exception e) {
@@ -84,7 +84,7 @@ public class CustomerController {
 	}
 	@RequestMapping(value = "/delete")
 	public @ResponseBody ResultDto<Customer> delete(@RequestParam(value = "id") Long id){
-		ResultDto<Customer> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Customer> ret = new ResultDto<Customer>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = cusService.delete(id);
 		} catch (Exception e) {
@@ -97,7 +97,7 @@ public class CustomerController {
 	
 	@RequestMapping(value = "/get")
 	public @ResponseBody ResultDto<Customer> get(@RequestParam(value = "id") Long id){
-		ResultDto<Customer> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Customer> ret = new ResultDto<Customer>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = cusService.get(id);
 		} catch (Exception e) {

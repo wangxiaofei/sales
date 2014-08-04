@@ -31,7 +31,7 @@ public class RepairServiceImpl implements RepairService {
 	
 	@Override
 	public ResultDto<Page<RepairRecord>> getList(Long saleId, Integer page, Integer count) throws Exception {
-		ResultDto<Page<RepairRecord>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<RepairRecord>> ret = new ResultDto<Page<RepairRecord>>(EnumResultCode.SUCCESS.getCode());
 		if(page == null || count == null){
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -43,7 +43,7 @@ public class RepairServiceImpl implements RepairService {
 				User user = userDao.getById(r.getRepairUserId());
 				r.setRepairUser(user);
 			}
-			Page<RepairRecord> p = new Page<>(page,count);
+			Page<RepairRecord> p = new Page<RepairRecord>(page,count);
 			p.setList(list);
 			p.setTotalResults(total);
 			ret.setData(p);
@@ -56,7 +56,7 @@ public class RepairServiceImpl implements RepairService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<RepairRecord> create(RepairRecord repair) {
-		ResultDto<RepairRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<RepairRecord> ret = new ResultDto<RepairRecord>(EnumResultCode.SUCCESS.getCode());
 		if(repair == null){
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -70,7 +70,7 @@ public class RepairServiceImpl implements RepairService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<RepairRecord> delete(Long id) {
-		ResultDto<RepairRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<RepairRecord> ret = new ResultDto<RepairRecord>(EnumResultCode.SUCCESS.getCode());
 		if(id == null){
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;

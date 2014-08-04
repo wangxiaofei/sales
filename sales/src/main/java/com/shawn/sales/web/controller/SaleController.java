@@ -37,7 +37,7 @@ public class SaleController {
 	@RequestMapping(value = "/create")
 	public @ResponseBody
 	ResultDto<SaleRecord> create(@RequestBody SaleRecord sale) {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = saleService.create(sale);
 		} catch (Exception e) {
@@ -51,7 +51,7 @@ public class SaleController {
 	@RequestMapping(value = "/list")
 	public @ResponseBody
 	ResultDto<Page<SaleRecord>> getList(HttpServletRequest request, @RequestParam(value = "userId", required = false) Long userId, @RequestParam("page") Integer page, @RequestParam("count") Integer count) {
-		ResultDto<Page<SaleRecord>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<SaleRecord>> ret = new ResultDto<Page<SaleRecord>>(EnumResultCode.SUCCESS.getCode());
 		try {
 
 			ret = saleService.getList(null, page, count);
@@ -66,7 +66,7 @@ public class SaleController {
 	@RequestMapping(value = "/search")
 	public @ResponseBody
 	ResultDto<Page<SaleRecord>> search(HttpServletRequest request, @RequestParam(value = "keywords",required=false) String keywords, @RequestParam(value="dateWords",required=false) String dateWords,@RequestParam(value = "userId", required = false) Long userId, @RequestParam("page") Integer page, @RequestParam("count") Integer count) {
-		ResultDto<Page<SaleRecord>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<SaleRecord>> ret = new ResultDto<Page<SaleRecord>>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = saleService.search(null, page, count, keywords,dateWords);
 		} catch (Exception e) {
@@ -80,7 +80,7 @@ public class SaleController {
 	@RequestMapping(value = "/update")
 	public @ResponseBody
 	ResultDto<SaleRecord> update(@RequestBody SaleRecord sale) {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = saleService.update(sale);
 		} catch (Exception e) {
@@ -94,7 +94,7 @@ public class SaleController {
 	@RequestMapping(value = "/delete")
 	public @ResponseBody
 	ResultDto<SaleRecord> delete(@RequestParam(value = "id") Long id) {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = saleService.delete(id);
 		} catch (Exception e) {
@@ -108,7 +108,7 @@ public class SaleController {
 	@RequestMapping(value = "/get")
 	public @ResponseBody
 	ResultDto<SaleRecord> get(@RequestParam(value = "id") Long id) {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = saleService.get(id);
 		} catch (Exception e) {
@@ -122,7 +122,7 @@ public class SaleController {
 	@RequestMapping(value = "/process")
 	public @ResponseBody
 	ResultDto<SaleRecord> process(@RequestParam(value = "id") Long id) {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = saleService.process(id);
 		} catch (Exception e) {
@@ -136,7 +136,7 @@ public class SaleController {
 	@RequestMapping(value = "/visit/list")
 	public @ResponseBody
 	ResultDto<Page<VisitRecord>> getVisitList(HttpServletRequest request, @RequestParam(value = "saleId", required = false) Long saleId, @RequestParam("page") Integer page, @RequestParam("count") Integer count) {
-		ResultDto<Page<VisitRecord>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<VisitRecord>> ret = new ResultDto<Page<VisitRecord>>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = visitService.getList(saleId, page, count);
 		} catch (Exception e) {
@@ -150,7 +150,7 @@ public class SaleController {
 	@RequestMapping(value = "/repair/list")
 	public @ResponseBody
 	ResultDto<Page<RepairRecord>> getRepairList(HttpServletRequest request, @RequestParam(value = "saleId", required = false) Long saleId, @RequestParam("page") Integer page, @RequestParam("count") Integer count) {
-		ResultDto<Page<RepairRecord>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<RepairRecord>> ret = new ResultDto<Page<RepairRecord>>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = repairService.getList(saleId, page, count);
 		} catch (Exception e) {
@@ -164,7 +164,7 @@ public class SaleController {
 	@RequestMapping(value = "/visit/create")
 	public @ResponseBody
 	ResultDto<VisitRecord> createVisit(@RequestBody VisitRecord visit) {
-		ResultDto<VisitRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<VisitRecord> ret = new ResultDto<VisitRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = visitService.create(visit);
 		} catch (Exception e) {
@@ -178,7 +178,7 @@ public class SaleController {
 	@RequestMapping(value = "/repair/create")
 	public @ResponseBody
 	ResultDto<RepairRecord> createVisit(@RequestBody RepairRecord repair) {
-		ResultDto<RepairRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<RepairRecord> ret = new ResultDto<RepairRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = repairService.create(repair);
 		} catch (Exception e) {
@@ -192,7 +192,7 @@ public class SaleController {
 	@RequestMapping(value = "/visit/delete")
 	public @ResponseBody
 	ResultDto<VisitRecord> deleteVisit(@RequestParam(value = "id") Long id) {
-		ResultDto<VisitRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<VisitRecord> ret = new ResultDto<VisitRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = visitService.delete(id);
 		} catch (Exception e) {
@@ -206,7 +206,7 @@ public class SaleController {
 	@RequestMapping(value = "/repair/delete")
 	public @ResponseBody
 	ResultDto<RepairRecord> deleteRepair(@RequestParam(value = "id") Long id) {
-		ResultDto<RepairRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<RepairRecord> ret = new ResultDto<RepairRecord>(EnumResultCode.SUCCESS.getCode());
 		try {
 			ret = repairService.delete(id);
 		} catch (Exception e) {

@@ -27,7 +27,7 @@ public class VisitServiceImpl implements VisitService {
 
 	@Override
 	public ResultDto<Page<VisitRecord>> getList(Long saleId, Integer page, Integer count) throws Exception {
-		ResultDto<Page<VisitRecord>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<VisitRecord>> ret = new ResultDto<Page<VisitRecord>>(EnumResultCode.SUCCESS.getCode());
 		if (page == null || count == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -35,7 +35,7 @@ public class VisitServiceImpl implements VisitService {
 		List<VisitRecord> list = visitDao.getList(saleId, PageHelper.getStartPosition(page, count), count);
 		Integer total = visitDao.getListCount(saleId);
 		if (list != null && !list.isEmpty()) {
-			Page<VisitRecord> p = new Page<>(page, count);
+			Page<VisitRecord> p = new Page<VisitRecord>(page, count);
 			p.setList(list);
 			p.setTotalResults(total);
 			ret.setData(p);
@@ -48,7 +48,7 @@ public class VisitServiceImpl implements VisitService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<VisitRecord> create(VisitRecord visit) {
-		ResultDto<VisitRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<VisitRecord> ret = new ResultDto<VisitRecord>(EnumResultCode.SUCCESS.getCode());
 		if (visit == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -61,7 +61,7 @@ public class VisitServiceImpl implements VisitService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<VisitRecord> delete(Long id) {
-		ResultDto<VisitRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<VisitRecord> ret = new ResultDto<VisitRecord>(EnumResultCode.SUCCESS.getCode());
 		if (id == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;

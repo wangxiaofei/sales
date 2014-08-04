@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public ResultDto<User> create(User user) throws Exception {
-		ResultDto<User> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<User> ret = new ResultDto<User>(EnumResultCode.SUCCESS.getCode());
 		if (user == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResultDto<Page<User>> getList(Integer pageIndex, Integer pageSize) throws Exception {
-		ResultDto<Page<User>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<User>> ret = new ResultDto<Page<User>>(EnumResultCode.SUCCESS.getCode());
 		if (pageIndex == null || pageSize == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 		List<User> list = userDao.getList(PageHelper.getStartPosition(pageIndex, pageSize), pageSize);
 		Integer totalCount = userDao.getListCount();
 		if (list != null && !list.isEmpty()) {
-			Page<User> page = new Page<>(pageIndex,pageSize);
+			Page<User> page = new Page<User>(pageIndex,pageSize);
 			page.setList(list);
 			page.setTotalResults(totalCount);
 			ret.setData(page);
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<User> update(User user) throws Exception {
-		ResultDto<User> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<User> ret = new ResultDto<User>(EnumResultCode.SUCCESS.getCode());
 		if (user == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<User> delete(Long id) throws Exception {
-		ResultDto<User> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<User> ret = new ResultDto<User>(EnumResultCode.SUCCESS.getCode());
 		if (id == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResultDto<User> get(Long id) {
-		ResultDto<User> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<User> ret = new ResultDto<User>(EnumResultCode.SUCCESS.getCode());
 		if (id == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResultDto<Boolean> checkUserName(String loginName) {
-		ResultDto<Boolean> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Boolean> ret = new ResultDto<Boolean>(EnumResultCode.SUCCESS.getCode());
 		if(StringUtils.isEmpty(loginName)){
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResultDto<User> login(HttpServletRequest request, String loginName, String password) throws Exception {
-		ResultDto<User> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<User> ret = new ResultDto<User>(EnumResultCode.SUCCESS.getCode());
 		if(StringUtils.isEmpty(loginName) || StringUtils.isEmpty(password)){
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -153,7 +153,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResultDto<Boolean> logout(HttpServletRequest request) {
-		ResultDto<Boolean> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Boolean> ret = new ResultDto<Boolean>(EnumResultCode.SUCCESS.getCode());
 		HttpSession session = request.getSession(false);
 		if(session != null){
 			session.invalidate();
@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public ResultDto<User> resetPassword(User user) {
-		ResultDto<User> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<User> ret = new ResultDto<User>(EnumResultCode.SUCCESS.getCode());
 		if(user == null || user.getId()==null ||  user.getPassword() == null || user.getNewPassword() == null){
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;

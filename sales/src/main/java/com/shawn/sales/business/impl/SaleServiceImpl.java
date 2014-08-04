@@ -40,7 +40,7 @@ public class SaleServiceImpl implements SaleService {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public ResultDto<SaleRecord> create(SaleRecord sale) throws Exception {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		if (sale == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -53,7 +53,7 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public ResultDto<Page<SaleRecord>> getList(Long userId, Integer page, Integer count) throws Exception {
-		ResultDto<Page<SaleRecord>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<SaleRecord>> ret = new ResultDto<Page<SaleRecord>>(EnumResultCode.SUCCESS.getCode());
 		if (page == null || count == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -87,7 +87,7 @@ public class SaleServiceImpl implements SaleService {
 				}
 			}
 
-			Page<SaleRecord> p = new Page<>(page, count);
+			Page<SaleRecord> p = new Page<SaleRecord>(page, count);
 			p.setList(list);
 			p.setTotalResults(total);
 			ret.setData(p);
@@ -99,7 +99,7 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public ResultDto<Page<SaleRecord>> search(Long userId, Integer page, Integer count, String keywords,String dateWords) throws Exception {
-		ResultDto<Page<SaleRecord>> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<Page<SaleRecord>> ret = new ResultDto<Page<SaleRecord>>(EnumResultCode.SUCCESS.getCode());
 		if (page == null || count == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -133,7 +133,7 @@ public class SaleServiceImpl implements SaleService {
 				}
 			}
 
-			Page<SaleRecord> p = new Page<>(page, count);
+			Page<SaleRecord> p = new Page<SaleRecord>(page, count);
 			p.setList(list);
 			p.setTotalResults(total);
 			ret.setData(p);
@@ -146,7 +146,7 @@ public class SaleServiceImpl implements SaleService {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public ResultDto<SaleRecord> update(SaleRecord sale) throws Exception {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		if (sale == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -159,7 +159,7 @@ public class SaleServiceImpl implements SaleService {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public ResultDto<SaleRecord> delete(Long id) throws Exception {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		if (id == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -173,7 +173,7 @@ public class SaleServiceImpl implements SaleService {
 
 	@Override
 	public ResultDto<SaleRecord> get(Long id) {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		if (id == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
@@ -190,7 +190,7 @@ public class SaleServiceImpl implements SaleService {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public ResultDto<SaleRecord> process(Long id) {
-		ResultDto<SaleRecord> ret = new ResultDto<>(EnumResultCode.SUCCESS.getCode());
+		ResultDto<SaleRecord> ret = new ResultDto<SaleRecord>(EnumResultCode.SUCCESS.getCode());
 		if (id == null) {
 			ret.setCode(EnumResultCode.ERROR_PARAM_EMPTY.getCode());
 			return ret;
