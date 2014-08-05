@@ -10,7 +10,7 @@ var SALES = angular.module('SALES', [
     'SALES.directives',
     'angular-md5'
 ]);
-SALES.constant('SERVER_URL', 'http://localhost:8080/sales');
+SALES.constant('SERVER_URL', 'http://sales4shawn.jd-app.com');
 
 SALES.value('http_defaults', {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
