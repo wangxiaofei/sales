@@ -1,0 +1,47 @@
+<div>
+    <div>
+        <ol class="breadcrumb">
+            <li><a href="#/sale/list">销售管理</a></li>
+            <li> <a href="#/sale/list">列表</a></li>
+            <li><a>销售记录{{saleId}}</a></li>
+            <li class="active">新建回访记录</li>
+        </ol>
+
+    </div>
+    <form class="form-horizontal" role="form" name="form" ng-submit="createVisit();">
+
+        <div class="form-group">
+            <label for="content" class="col-sm-2 control-label">回访内容</label>
+
+            <div class="col-sm-5">
+                <input type="text" name="content" maxlength="20" class="form-control" id="content"
+                       placeholder="回访内容"
+                       ng-model="visit.content" required="true" ng-minlength=4 ng-maxlength=100>
+            </div>
+            <div class="error" ng-show="form.content.$dirty && form.content.$invalid">
+                <small class="alert alert-danger well-sm" ng-show="form.content.$error.required">回访内容是必须的</small>
+                <small class="alert alert-danger well-sm" ng-show="form.content.$error.minlength">长度必须大于4</small>
+                <small class="alert alert-danger well-sm" ng-show="form.content.$error.maxlength">长度不能大于100</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="visitTime" class="col-sm-2 control-label">回访时间</label>
+
+            <div class="col-sm-5">
+                <input type="date" ui-date="startDateOptions" name="visitTime" maxlength="20" class="form-control" id="visitTime" placeholder="回访时间"
+                       ng-model="visit.visitTime" required="true" ng-pattern="/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$/">
+            </div>
+            <div class="error" ng-show="form.visitTime.$dirty && form.visitTime.$invalid">
+                <small class="alert alert-danger well-sm" ng-show="form.visitTime.$error.required">回访时间为必须的</small>
+                <small class="alert alert-danger well-sm" ng-show="form.visitTime.$error.pattern">格式不正确，例如2013-01-01</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary btn-lg">保存</button>
+            </div>
+        </div>
+    </form>
+</div>

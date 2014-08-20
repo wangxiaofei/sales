@@ -1,0 +1,82 @@
+<div>
+    <div>
+        <ol class="breadcrumb">
+            <li><a href="#/user/list">用户管理</a></li>
+            <li class="active">列表</li>
+            <a href="#/user/create" class="pull-right">新建</a>
+        </ol>
+
+    </div>
+    <div class="table-responsive">
+        <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+                <th><label>ID</label></th>
+                <th><label>登录名</label></th>
+                <th><label>姓名</label></th>
+                <th><label>邮箱地址</label></th>
+                <th><label>角色</label></th>
+                <th><label>创建时间</label></th>
+                <th><label>更新时间</label></th>
+                <th><label>操作</label></th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="rd in paginator.currentPageItems">
+            <tr>
+                <td>{{rd.id}}</td>
+                <td>{{rd.loginName}}</td>
+                <td>{{rd.userName}}</td>
+                <td>{{rd.email}}</td>
+                <td>{{rd.role | roleFormat}}</td>
+                <td>{{rd.createTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td>{{rd.updateTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td>
+                    <a href="#/user/update/{{rd.id}}" class="">修改</a>
+                    <a href="" ng-click="confirmDel(rd);" class="">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal hide fade" id="deleteModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>系统提示</h3>
+        </div>
+        <div class="modal-body">
+            <p>确定要删除吗？</p>
+        </div>
+        <div class="modal-footer">
+            <a href="deleteUser()" class="btn btn-primary btn-confirm">确定</a>
+            <a href="#" class="btn" data-dismiss="modal">取消</a>
+        </div>
+    </div>
+    <div ng-show="hasData==2">
+        <h2>没有相关数据</h2>
+    </div>
+    <div class="error" ng-show="hasData==3 || hasData==4">
+        抱歉，发送内部错误
+    </div>
+    <ul class="pager" ng-show="hasData==1 && page.pageCount > 1">
+        <li>
+            <button class="btn btn-primary btn-sm" ng-class="{disabled:page.page == 1}" ng-disabled="page.page == 1"
+                    ng-click="goToPrev()">上一页
+            </button>
+        </li>
+        <li class="num">{{page.page}}/{{page.pageCount}}</li>
+        <li>
+            <button class="btn btn-primary btn-sm" ng-class="{disabled:page.page ==  page.pageCount}"
+                    ng-disabled="page.page == page.pageCount"
+                    ng-click="goToNext()">下一页
+            </button>
+        </li>
+        <li class="search">前往第<input type="text" ng-init="goToPage=1" ng-model="goToPage">页
+            <button class="btn btn-primary btn-sm"
+                    ng-disabled=" !(goToPage != '' && goToPage<=page.pageCount && goToPage >= 1)"
+                    ng-class="{disabled:!(goToPage != '' && goToPage<=page.pageCount && goToPage >= 1)  } "
+                    ng-click="goToAppoint(goToPage)">GO!
+            </button>
+        </li>
+    </ul>
+</div>
+</div>
