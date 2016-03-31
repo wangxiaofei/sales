@@ -1,6 +1,8 @@
 package com.shawn.sales.tasks;
 
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.slf4j.Logger;
@@ -36,33 +38,48 @@ public class TaskJobs {
 	@Autowired
 	private ThreadPoolTaskExecutor taskExecutor;
 
-	 @Scheduled(cron = "0/5 * * * * *")
+	private AtomicInteger threadCount = new AtomicInteger(0);
+
+	@Scheduled(cron = "0/3 * * * * *")
 	void doSomethingWith() {
 		// System.out.println("I'm doing with cron now!");
 		// logger.debug("log-I'm doing with cron now!");
-		 monitor.info("test");
-		 
-		 taskExecutor.execute(new Runnable() {
+		monitor.info("test");
+		
+		//monitor.info("当前线程线程数==="+threadCount.get());
+		for ( int i = 0; i < 100; i++) {
 			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				monitor.info("task....");
-				monitor.info("getActiveCount="+taskExecutor.getActiveCount());
-				monitor.info("getMaxPoolSize="+taskExecutor.getMaxPoolSize());
-				monitor.info("getPoolSize="+taskExecutor.getPoolSize());
-				monitor.info("getCorePoolSize="+taskExecutor.getCorePoolSize());
-				try {
-					Thread.sleep(100000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			
+			taskExecutor.execute(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					int crCount =	threadCount.incrementAndGet();
+					
+					monitor.info("线程-----" + crCount + "---开始执行任务");
+					monitor.info("getActiveCount=" + taskExecutor.getActiveCount());
+					monitor.info("getMaxPoolSize=" + taskExecutor.getMaxPoolSize());
+					monitor.info("getPoolSize=" + taskExecutor.getPoolSize());
+					monitor.info("getCorePoolSize=" + taskExecutor.getCorePoolSize());
+					try {
+						Thread.sleep(60000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					monitor.info("线程-----" + crCount + "---执行任务完毕");
+					
 				}
-			}
-		});
+			});
+			
+			
+			
+		}
+
 	}
 
-//	@Scheduled(cron = "0 0 12 * * ?")
+	// @Scheduled(cron = "0 0 12 * * ?")
 	void checkUpdateProduct() {
 		logger.info("检查更新产品...");
 		List<SaleRecord> saleList = saleDao.getNeedUpdateList();
