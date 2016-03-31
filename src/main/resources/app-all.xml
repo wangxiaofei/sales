@@ -14,5 +14,6 @@
 	<beans:import resource="spring-mvc-context.xml"/>
 	<beans:import resource="spring-tasker.xml"/>	
 	<beans:import resource="spring-mail.xml"/>
+	<beans:import resource="spring-thread.xml"/>
 	
 </beans>
